@@ -14,7 +14,8 @@ public class Tp1 {
         // Appel de la méthode de l'exercice 1.1
         //exercice1_1();
         //exercice1_2();
-        exercice2_1();
+        //exercice2_1();
+        exercice2_2();
 
         scanner.close();
     }
@@ -77,6 +78,22 @@ public class Tp1 {
         }
         if (mot1.length()==mot2.length()){
             System.out.println("Les deux mots ont le même nombre de caractères.");
+        }
+    }
+
+    // Méthode de l'exercice n2.2
+    public static void exercice2_2(){
+        int annee;
+
+        System.out.print("Saisir une année : ");
+        annee = scanner.nextInt();
+
+        if (annee % 4 ==0){
+            if (annee % 100!=0){
+                System.out.println("L'année " + annee + " est bissextile");
+            }
+        } else {
+            System.out.println("L'année " + annee + " n'est pas bissextile");
         }
     }
 
