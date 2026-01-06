@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -15,7 +17,9 @@ public class Tp1 {
         //exercice1_1();
         //exercice1_2();
         //exercice2_1();
-        exercice2_2();
+        //exercice2_2();
+        //exercice3_1();
+        exercice4_1();
 
         scanner.close();
     }
@@ -45,20 +49,17 @@ public class Tp1 {
     public static void exercice1_2() {
         int x;
         int y;
-        int x2;
-        int y2;
 
         System.out.print("Saisir valeur de x : ");
         x = scanner.nextInt();
         System.out.print("Saisir valeur de y : ");
         y = scanner.nextInt();
-        x2 = y;
-        y2 = x;
 
-        x= y;
-        y=x;
+        x=x+y;
+        y=x-y;
+        x=x-y;
 
-        System.out.println("Les valeurs sont permutées, x vaut " + x2 + " et y vaut " + y2);
+        System.out.println("Les valeurs sont permutées, x vaut " + x + " et y vaut " + y);
     }
 
     // Méthode de l'exercice n2.1
@@ -97,4 +98,61 @@ public class Tp1 {
         }
     }
 
+    // Méthode de l'exercice n3.1
+    public static void exercice3_1(){
+        int max = Integer.MAX_VALUE;
+
+        int min = Integer.MIN_VALUE;
+
+        for(int i = 0; i<10; i++){
+            int aleatoire = (int) (Math.random() * 101);
+
+            System.out.println(aleatoire);
+
+            //aleatoire est un nouveau max ?
+            if (aleatoire > max){
+                max = aleatoire;
+            }
+
+            // aleatoire est un nouveau min
+            if (aleatoire < min){
+                min =aleatoire;
+            }
+        }
+
+        System.out.println("Le max est : " + max);
+        System.out.println("Le min est : " + min);
+    }
+
+    // Méthode de l'exercice 4.1
+    public static void exercice4_1(){
+        int rand = (int) (Math.random() * 101);
+        int nombre = 0;
+        System.out.println("Entrer un nombre");
+        nombre = scanner.nextInt();
+
+
+
+        for (int i=0; i<i+1; i++){
+            if(rand-nombre>20){
+                System.out.println("froid");
+                System.out.println("Entrer un nombre");
+                nombre = scanner.nextInt();
+            } else if (rand-nombre>=1){
+                if (rand-nombre<=5){
+                    System.out.println("chaud");
+                    System.out.println("Entrer un nombre");
+                    nombre = scanner.nextInt();
+                }
+            } else if (rand-nombre>=20){
+                if (rand-nombre<=6){
+                    System.out.println("tiède");
+                    System.out.println("Entrer un nombre");
+                    nombre = scanner.nextInt();
+                }
+            } else if (rand==nombre){
+                System.out.println("Gagné (" + i + "tentatives)");
+            }
+        }
+    }
 }
