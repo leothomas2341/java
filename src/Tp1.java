@@ -131,7 +131,25 @@ public class Tp1 {
         int tentatives = 0;
 
         //Version while
-        while (nombre != rand){
+//        while (nombre != rand){
+//            System.out.println("Entrer un nombre : ");
+//            nombre = scanner.nextInt();
+//            tentatives++;
+//
+//            int difference = Math.abs(rand - nombre);
+//
+//            if (difference == 0){
+//                System.out.println("Gagné (" + tentatives + " tentatives)");
+//            } else if (difference > 20) {
+//                System.out.println("froid");
+//            } else if (difference >= 6 && difference <= 20){
+//                System.out.println("tiède");
+//            } else if (difference >= 1 && difference <= 5){
+//                System.out.println("chaud");
+//            }
+//        }
+        //version do while
+        do {
             System.out.println("Entrer un nombre : ");
             nombre = scanner.nextInt();
             tentatives++;
@@ -140,13 +158,13 @@ public class Tp1 {
 
             if (difference == 0){
                 System.out.println("Gagné (" + tentatives + " tentatives)");
-            } else if (difference > 20) {
+            }else if (difference > 20){
                 System.out.println("froid");
             } else if (difference >= 6 && difference <= 20){
                 System.out.println("tiède");
-            } else if (difference >= 1 && difference <= 5){
+            } else if (difference >=1 && difference <=5){
                 System.out.println("chaud");
             }
-        }
+        } while (nombre!=rand);
     }
 }
