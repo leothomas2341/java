@@ -15,18 +15,35 @@ public class Tp2 {
         System.out.print("Saisir un nombre : ");
         int n = scanner.nextInt();
         // méthode 1
-        int f0 = 0;
-        int f1 = 1;
+//        int f0 = 0;
+//        int f1 = 1;
+//
+//        for (int i = 2; i<=n; i++){
+//            int next = f0 + f1;
+//            System.out.println(next);
+//            f0 = f1;
+//            f1 = next;
+//        }
+//
+//        System.out.println("fibo à F" + n + " = " + f1);
 
-        for (int i = 2; i<=n; i++){
-            int next = f0 + f1;
-            System.out.println(next);
-            f0 = f1;
-            f1 = next;
+        // méthode 2
+
+        int [] fibo = new int[n + 1];
+        fibo[0] = 0;
+
+        if (n>=1){
+            fibo[1] = 1;
         }
 
-        System.out.println("fibo à F" + n + " = " + f1);
+        for(int i = 2; i<=n; i++){
+            fibo[i] = fibo[i-1] + fibo[i-2];
+        }
 
+        for(int i=0; i<=n; i++){
+            System.out.println(fibo[i]);
+        }
 
+        System.out.println("fibo à f" + n + " = " + fibo[n]);
     }
 }
