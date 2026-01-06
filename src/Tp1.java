@@ -128,30 +128,24 @@ public class Tp1 {
     public static void exercice4_1(){
         int rand = (int) (Math.random() * 101);
         int nombre = 0;
-        System.out.println("Entrer un nombre");
-        nombre = scanner.nextInt();
+        int tentatives = 0;
 
+        //Version while
+        while (nombre != rand){
+            System.out.println("Entrer un nombre : ");
+            nombre = scanner.nextInt();
+            tentatives++;
 
+            int difference = Math.abs(rand - nombre);
 
-        for (int i=0; i<i+1; i++){
-            if(rand-nombre>20){
+            if (difference == 0){
+                System.out.println("Gagné (" + tentatives + " tentatives)");
+            } else if (difference > 20) {
                 System.out.println("froid");
-                System.out.println("Entrer un nombre");
-                nombre = scanner.nextInt();
-            } else if (rand-nombre>=1){
-                if (rand-nombre<=5){
-                    System.out.println("chaud");
-                    System.out.println("Entrer un nombre");
-                    nombre = scanner.nextInt();
-                }
-            } else if (rand-nombre>=20){
-                if (rand-nombre<=6){
-                    System.out.println("tiède");
-                    System.out.println("Entrer un nombre");
-                    nombre = scanner.nextInt();
-                }
-            } else if (rand==nombre){
-                System.out.println("Gagné (" + i + "tentatives)");
+            } else if (difference >= 6 && difference <= 20){
+                System.out.println("tiède");
+            } else if (difference >= 1 && difference <= 5){
+                System.out.println("chaud");
             }
         }
     }
