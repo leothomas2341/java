@@ -3,11 +3,12 @@ package leothomas.javabnb;
 import leothomas.javabnb.utilisateurs.Personne;
 import leothomas.javabnb.logements.Logement;
 import leothomas.javabnb.reservations.Sejour;
+import leothomas.javabnb.outils.Utile;
 import java.util.Date;
 
 public class Main {
     public static void main(String[] args){
-        // Création de plusieurs personnes avec des noms de basketteurs NBA
+        // Création de plusieurs personnes
         Personne personne1 = new Personne("LeBron", "James", 39);
         Personne personne2 = new Personne("Michael", "Jordan", 61);
         Personne personne3 = new Personne("Kobe", "Bryant", 45);
@@ -44,5 +45,29 @@ public class Main {
 
         // Affichage du séjour
         sejour1.afficher();
+
+        System.out.println("Test Classe Utile");
+
+        // Test de creerDate
+        System.out.println("Test méthode crierDate()");
+        Date date1 = Utile.creerDate(5, 7, 2024);
+        System.out.println("Date créée (5 juillet 2024) : " + date1);
+
+        Date date2 = Utile.creerDate(25, 12, 2023);
+        System.out.println("Date créée (25 décembre 2023) : " + date2);
+
+        Date date3 = Utile.creerDate(1, 1, 2025);
+        System.out.println("Date créée (1er janvier 2025) : " + date3);
+
+        // Test de formaterDate
+        System.out.println("Test méthode formaterDate()");
+        String dateFormatee1 = Utile.formaterDate(date1);
+        System.out.println("Date formatée : " + dateFormatee1 + " (attendu : 05/07/2024)");
+
+        String dateFormatee2 = Utile.formaterDate(date2);
+        System.out.println("Date formatée : " + dateFormatee2 + " (attendu : 25/12/2023)");
+
+        String dateFormatee3 = Utile.formaterDate(date3);
+        System.out.println("Date formatée : " + dateFormatee3 + " (attendu : 01/01/2025)");
     }
 }
