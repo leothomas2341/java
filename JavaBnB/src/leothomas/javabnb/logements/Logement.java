@@ -2,7 +2,7 @@ package leothomas.javabnb.logements;
 
 import leothomas.javabnb.utilisateurs.Personne;
 
-public class Logement {
+public abstract class Logement {
 	private Personne hote;
 	private int tarifParNuit;
 	private String adresse;
@@ -21,12 +21,17 @@ public class Logement {
 		return tarifParNuit;
 	}
 
-	public void afficher() {
-		hote.afficher();
-		System.out.println();
-		System.out.println("Cours 2024 " + hote.getNom() + " " + tarifParNuit);
-		System.out.println();
-		System.out.println("Le logement est situé " + adresse + ".");
-		System.out.println("Superficie : " + superficie + "m2");
+	public String getAdresse() {
+		return adresse;
 	}
+
+	public int getSuperficie() {
+		return superficie;
+	}
+
+	public Personne getHote() {
+		return hote;
+	}
+
+	public abstract void afficher();
 }

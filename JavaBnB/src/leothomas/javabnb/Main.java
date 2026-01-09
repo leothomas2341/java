@@ -1,7 +1,10 @@
 package leothomas.javabnb;
 
 import leothomas.javabnb.utilisateurs.Personne;
+import leothomas.javabnb.utilisateurs.Hote;
 import leothomas.javabnb.logements.Logement;
+import leothomas.javabnb.logements.Maison;
+import leothomas.javabnb.logements.Appartement;
 import leothomas.javabnb.reservations.Sejour;
 import leothomas.javabnb.outils.Utile;
 import java.util.Date;
@@ -24,9 +27,11 @@ public class Main {
 
         System.out.println("Test Logements");
 
-        // Création de logements avec les personnes
-        Logement logement1 = new Logement(personne1, 150, "81 Rue Colbert, 37000 Tours", 140, 4);
-        Logement logement2 = new Logement(personne2, 200, "42 Avenue des Champs, 75008 Paris", 120, 3);
+        // Création de logements avec les personnes (utilisation de Maison et Appartement car Logement est abstraite)
+        Hote hote1 = new Hote("LeBron", "James", 39, 24);
+        Hote hote2 = new Hote("Michael", "Jordan", 61, 12);
+        Logement logement1 = new Maison(hote1, 150, "81 Rue Colbert, 37000 Tours", 140, 4, true, 300, false);
+        Logement logement2 = new Appartement(hote2, 200, "42 Avenue des Champs, 75008 Paris", 120, 3, "2ème étage", true, 10);
 
         // Affichage des logements
         logement1.afficher();
@@ -36,7 +41,8 @@ public class Main {
         System.out.println("Test Sejour");
 
         // Création d'un logement avec un tarif de 40€ pour le test du séjour
-        Logement logementSejour = new Logement(new Personne("Peter", "Bardu", 28), 40, "81 Rue Colbert, 37000 Tours", 140, 4);
+        Hote hoteSejour = new Hote("Peter", "Bardu", 28, 12);
+        Logement logementSejour = new Maison(hoteSejour, 40, "81 Rue Colbert, 37000 Tours", 140, 4, true, 200, false);
 
         // Création d'un séjour
         // Il est précisé l'année de la date (124) car la convention de la classe Date commence à 19000
@@ -69,5 +75,26 @@ public class Main {
 
         String dateFormatee3 = Utile.formaterDate(date3);
         System.out.println("Date formatée : " + dateFormatee3 + " (attendu : 01/01/2025)");
+
+        System.out.println("Test Classe Maison");
+        Hote hoteMaillon = new Hote("Peter", "Bardu", 28, 12);
+        Maison maison = new Maison(hoteMaillon, 150, "81 Rue Colbert, 37000 Tours", 140, 6, true, 500, true);
+        maison.afficher();
+
+        System.out.println("Test Maison sans jardin ni piscine");
+        Maison maison2 = new Maison(hoteMaillon, 150, "81 Rue Colbert, 37000 Tours", 140, 6, false, 0, false);
+        maison2.afficher();
+
+        System.out.println("Test appartement");
+        Appartement appart = new Appartement(hoteMaillon, 100, "46 Rue des Canonniers, 59800 Lille", 72, 4, "3ème étage", false, 0);
+        appart.afficher();
+
+        System.out.println("Test appartement avec balcon");
+        Appartement appart2 = new Appartement(hoteMaillon, 100, "46 Rue des Canonniers, 59800 Lille", 72, 4, "1er étage", true, 12);
+        appart2.afficher();
+
+        System.out.println("Test appartement avec rez de chaussé");
+        Appartement appart3 = new Appartement(hoteMaillon, 100, "46 Rue des Canonniers, 59800 Lille", 72, 4, "rez-de-chaussée", true, 8);
+        appart3.afficher();
     }
 }
