@@ -7,6 +7,8 @@ import leothomas.javabnb.logements.Logement;
 import leothomas.javabnb.logements.Maison;
 import leothomas.javabnb.logements.Appartement;
 import leothomas.javabnb.reservations.Sejour;
+import leothomas.javabnb.reservations.SejourCourt;
+import leothomas.javabnb.reservations.SejourLong;
 import leothomas.javabnb.reservations.Reservation;
 import leothomas.javabnb.outils.Utile;
 import java.util.Date;
@@ -49,7 +51,7 @@ public class Main {
         // Création d'un séjour
         // Il est précisé l'année de la date (124) car la convention de la classe Date commence à 19000
         Date dateArrivee = new Date(124, 6, 5); // Année 2024 (124+1900), mois 7 (0-indexed donc 6+1=7), jour 5
-        Sejour sejour1 = new Sejour(dateArrivee, 4, logementSejour, 2);
+        Sejour sejour1 = new SejourCourt(dateArrivee, 4, logementSejour, 2);
 
         // Affichage du séjour
         sejour1.afficher();
@@ -99,17 +101,27 @@ public class Main {
         Appartement appart3 = new Appartement(hoteMaillon, 100, "46 Rue des Canonniers, 59800 Lille", 72, 4, "rez-de-chaussée", true, 8);
         appart3.afficher();
 
-        System.out.println("Test Classe Reservation");
+        System.out.println("Test Classe Reservation - Séjour Court");
 
         // Création d'un voyageur
-        Voyageur maxime = new Voyageur("Maxime", "Adedjouma", 29);
+        Voyageur maxime = new Voyageur("Maxime", "Albert", 29);
 
-        // Création d'un séjour pour la réservation
-        Date dateArriveeReservation = Utile.creerDate(12, 4, 2024);
-        Sejour sejourReservation = new Sejour(dateArriveeReservation, 3, maison, 2);
+        // Création d'un séjour court (4 nuits) pour la réservation
+        Date dateArriveeSejourCourt = Utile.creerDate(5, 7, 2024);
+        Sejour sejourCourt = new SejourCourt(dateArriveeSejourCourt, 4, maison, 2);
 
-        // Création et affichage de la réservation
-        Reservation reservation = new Reservation(sejourReservation, maxime);
-        reservation.afficher();
+        // Création et affichage de la réservation pour un séjour court
+        Reservation reservationCourt = new Reservation(sejourCourt, maxime);
+        reservationCourt.afficher();
+
+        System.out.println("Test Classe Reservation - Séjour Long");
+
+        // Création d'un séjour long (7 nuits) pour la réservation avec promotion
+        Date dateArriveeSejourLong = Utile.creerDate(5, 7, 2024);
+        Sejour sejourLong = new SejourLong(dateArriveeSejourLong, 7, maison, 2);
+
+        // Création et affichage de la réservation pour un séjour long
+        Reservation reservationLong = new Reservation(sejourLong, maxime);
+        reservationLong.afficher();
     }
 }

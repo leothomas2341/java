@@ -2,8 +2,9 @@ package leothomas.javabnb.reservations;
 
 import java.util.Date;
 import leothomas.javabnb.logements.Logement;
+import leothomas.javabnb.outils.Utile;
 
-	public class Sejour implements Reservable {
+public abstract class Sejour implements Reservable {
 	private Date dateArrivee;
 	private int nbNuits;
 	private Logement logement;
@@ -16,15 +17,27 @@ import leothomas.javabnb.logements.Logement;
 		this.nbVoyageurs = nbVoyageurs;
 	}
 
-	public void afficher() {
-		logement.afficher();
-		System.out.println("La date d'arrivée est le " + String.format("%02d/%02d/%04d",
-			dateArrivee.getDate(), dateArrivee.getMonth() + 1, dateArrivee.getYear() + 1900) +
-			" pour " + nbNuits + " nuits.");
-		System.out.println("Le prix de ce séjour est de " + (logement.getTarifParNuit() * nbNuits) + "€.");
+	protected Date getDateArrivee() {
+		return dateArrivee;
 	}
 
-	@Override
+	protected int getNbNuits() {
+		return nbNuits;
+	}
+
+	protected Logement getLogement() {
+		return logement;
+	}
+
+	protected int getNbVoyageurs() {
+		return nbVoyageurs;
+	}
+
+    public void afficher() {
+
+    }
+
+    @Override
 	public boolean aUneDateArriveeCorrecte() {
 		return dateArrivee != null && dateArrivee.after(new Date());
 	}
