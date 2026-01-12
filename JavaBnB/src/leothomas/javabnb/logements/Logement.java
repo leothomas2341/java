@@ -33,5 +33,9 @@ public abstract class Logement {
 		return hote;
 	}
 
+	public int getNbVoyageursMax() {
+		return nbVoyageursMax;
+	}
+
 	public abstract void afficher();
 }

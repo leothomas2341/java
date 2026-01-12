@@ -2,10 +2,12 @@ package leothomas.javabnb;
 
 import leothomas.javabnb.utilisateurs.Personne;
 import leothomas.javabnb.utilisateurs.Hote;
+import leothomas.javabnb.utilisateurs.Voyageur;
 import leothomas.javabnb.logements.Logement;
 import leothomas.javabnb.logements.Maison;
 import leothomas.javabnb.logements.Appartement;
 import leothomas.javabnb.reservations.Sejour;
+import leothomas.javabnb.reservations.Reservation;
 import leothomas.javabnb.outils.Utile;
 import java.util.Date;
 
@@ -96,5 +98,18 @@ public class Main {
         System.out.println("Test appartement avec rez de chaussé");
         Appartement appart3 = new Appartement(hoteMaillon, 100, "46 Rue des Canonniers, 59800 Lille", 72, 4, "rez-de-chaussée", true, 8);
         appart3.afficher();
+
+        System.out.println("Test Classe Reservation");
+
+        // Création d'un voyageur
+        Voyageur maxime = new Voyageur("Maxime", "Adedjouma", 29);
+
+        // Création d'un séjour pour la réservation
+        Date dateArriveeReservation = Utile.creerDate(12, 4, 2024);
+        Sejour sejourReservation = new Sejour(dateArriveeReservation, 3, maison, 2);
+
+        // Création et affichage de la réservation
+        Reservation reservation = new Reservation(sejourReservation, maxime);
+        reservation.afficher();
     }
 }

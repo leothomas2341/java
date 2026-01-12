@@ -18,4 +18,12 @@ public class Personne {
 	public String getNom() {
 		return nom;
 	}
+
+	public String getPrenom() {
+		return prenom;
+	}
+
+	public int getAge() {
+		return age;
+	}
 }
