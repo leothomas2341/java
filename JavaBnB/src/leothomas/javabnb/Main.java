@@ -1,127 +1,92 @@
 package leothomas.javabnb;
 
+import leothomas.javabnb.reservations.*;
 import leothomas.javabnb.utilisateurs.Personne;
 import leothomas.javabnb.utilisateurs.Hote;
 import leothomas.javabnb.utilisateurs.Voyageur;
 import leothomas.javabnb.logements.Logement;
 import leothomas.javabnb.logements.Maison;
 import leothomas.javabnb.logements.Appartement;
-import leothomas.javabnb.reservations.Sejour;
-import leothomas.javabnb.reservations.SejourCourt;
-import leothomas.javabnb.reservations.SejourLong;
-import leothomas.javabnb.reservations.Reservation;
 import leothomas.javabnb.outils.Utile;
 import java.util.Date;
 
 public class Main {
     public static void main(String[] args){
-        // Création de plusieurs personnes
-        Personne personne1 = new Personne("LeBron", "James", 39);
-        Personne personne2 = new Personne("Michael", "Jordan", 61);
-        Personne personne3 = new Personne("Kobe", "Bryant", 45);
-        Personne personne4 = new Personne("Luka", "Doncic", 25);
-        Personne personne5 = new Personne("Kevin", "Durant", 35);
+        Hote hote1 = new Hote("Peter", "Bardu", 31, 1);
+        Hote hote2 = new Hote("Maxime", "Albert", 29, 12);
 
-        // Affichage de toutes les personnes
-        personne1.afficher();
-        personne2.afficher();
-        personne3.afficher();
-        personne4.afficher();
-        personne5.afficher();
+        Voyageur voyageur = new Voyageur("Sylvie", "Castillo", 74);
 
-        System.out.println("Test Logements");
+        Maison maison = new Maison(hote1, 50, "18 rue Colbert, 37000 Tours", 140, 5, 1000, true);
+        Appartement appartement = new Appartement(hote2, 80, "22 rue Colbert, 37000 Tours", 80, 2, "3ème étage", true, 10);
 
-        // Création de logements avec les personnes (utilisation de Maison et Appartement car Logement est abstraite)
-        Hote hote1 = new Hote("LeBron", "James", 39, 24);
-        Hote hote2 = new Hote("Michael", "Jordan", 61, 12);
-        Logement logement1 = new Maison(hote1, 150, "81 Rue Colbert, 37000 Tours", 140, 4, true, 300, false);
-        Logement logement2 = new Appartement(hote2, 200, "42 Avenue des Champs, 75008 Paris", 120, 3, "2ème étage", true, 10);
+        System.out.println("TEST 1 : Réservation valide");
+        Date dateArrivee1 = Utile.creerDate(15, 7, 2026);
+        int nbNuits1 = 7;
+        int nbVoyageurs1 = 3;
+        Sejour sejour1 = SejourFactory.createSejour(dateArrivee1, nbNuits1, maison, nbVoyageurs1);
 
-        // Affichage des logements
-        logement1.afficher();
+        try {
+            Reservation reservation1 = new Reservation(sejour1, voyageur);
+            reservation1.afficher();
+        } catch (Exception e) {
+            System.out.println("Erreur : " + e.getMessage());
+        }
         System.out.println();
-        logement2.afficher();
 
-        System.out.println("Test Sejour");
+        System.out.println("TEST 2 : Date d'arrivée dans le passé (1972)");
+        Date dateArrivee2 = Utile.creerDate(15, 7, 1972);
+        int nbNuits2 = 5;
+        int nbVoyageurs2 = 2;
+        Sejour sejour2 = SejourFactory.createSejour(dateArrivee2, nbNuits2, maison, nbVoyageurs2);
 
-        // Création d'un logement avec un tarif de 40€ pour le test du séjour
-        Hote hoteSejour = new Hote("Peter", "Bardu", 28, 12);
-        Logement logementSejour = new Maison(hoteSejour, 40, "81 Rue Colbert, 37000 Tours", 140, 4, true, 200, false);
+        try {
+            Reservation reservation2 = new Reservation(sejour2, voyageur);
+            reservation2.afficher();
+        } catch (Exception e) {
+            System.out.println("Erreur : " + e.getMessage());
+        }
+        System.out.println();
 
-        // Création d'un séjour
-        // Il est précisé l'année de la date (124) car la convention de la classe Date commence à 19000
-        Date dateArrivee = new Date(124, 6, 5); // Année 2024 (124+1900), mois 7 (0-indexed donc 6+1=7), jour 5
-        Sejour sejour1 = new SejourCourt(dateArrivee, 4, logementSejour, 2);
+        System.out.println("TEST 3 : Nombre de nuits incorrect (-42)");
+        Date dateArrivee3 = Utile.creerDate(15, 8, 2026);
+        int nbNuits3 = -42;
+        int nbVoyageurs3 = 2;
+        Sejour sejour3 = SejourFactory.createSejour(dateArrivee3, nbNuits3, maison, nbVoyageurs3);
 
-        // Affichage du séjour
-        sejour1.afficher();
+        try {
+            Reservation reservation3 = new Reservation(sejour3, voyageur);
+            reservation3.afficher();
+        } catch (Exception e) {
+            System.out.println("Erreur : " + e.getMessage());
+        }
+        System.out.println();
 
-        System.out.println("Test Classe Utile");
+        System.out.println("TEST 4 : Trop de voyageurs (32 dans un petit appartement)");
+        Date dateArrivee4 = Utile.creerDate(20, 9, 2026);
+        int nbNuits4 = 5;
+        int nbVoyageurs4 = 32;
+        Sejour sejour4 = SejourFactory.createSejour(dateArrivee4, nbNuits4, appartement, nbVoyageurs4);
 
-        // Test de creerDate
-        System.out.println("Test méthode crierDate()");
-        Date date1 = Utile.creerDate(5, 7, 2024);
-        System.out.println("Date créée (5 juillet 2024) : " + date1);
+        try {
+            Reservation reservation4 = new Reservation(sejour4, voyageur);
+            reservation4.afficher();
+        } catch (Exception e) {
+            System.out.println("Erreur : " + e.getMessage());
+        }
+        System.out.println();
 
-        Date date2 = Utile.creerDate(25, 12, 2023);
-        System.out.println("Date créée (25 décembre 2023) : " + date2);
+        System.out.println("TEST 5 : Nombre de nuits trop élevé (40 nuits)");
+        Date dateArrivee5 = Utile.creerDate(1, 10, 2026);
+        int nbNuits5 = 40;
+        int nbVoyageurs5 = 2;
+        Sejour sejour5 = SejourFactory.createSejour(dateArrivee5, nbNuits5, maison, nbVoyageurs5);
 
-        Date date3 = Utile.creerDate(1, 1, 2025);
-        System.out.println("Date créée (1er janvier 2025) : " + date3);
-
-        // Test de formaterDate
-        System.out.println("Test méthode formaterDate()");
-        String dateFormatee1 = Utile.formaterDate(date1);
-        System.out.println("Date formatée : " + dateFormatee1 + " (attendu : 05/07/2024)");
-
-        String dateFormatee2 = Utile.formaterDate(date2);
-        System.out.println("Date formatée : " + dateFormatee2 + " (attendu : 25/12/2023)");
-
-        String dateFormatee3 = Utile.formaterDate(date3);
-        System.out.println("Date formatée : " + dateFormatee3 + " (attendu : 01/01/2025)");
-
-        System.out.println("Test Classe Maison");
-        Hote hoteMaillon = new Hote("Peter", "Bardu", 28, 12);
-        Maison maison = new Maison(hoteMaillon, 150, "81 Rue Colbert, 37000 Tours", 140, 6, true, 500, true);
-        maison.afficher();
-
-        System.out.println("Test Maison sans jardin ni piscine");
-        Maison maison2 = new Maison(hoteMaillon, 150, "81 Rue Colbert, 37000 Tours", 140, 6, false, 0, false);
-        maison2.afficher();
-
-        System.out.println("Test appartement");
-        Appartement appart = new Appartement(hoteMaillon, 100, "46 Rue des Canonniers, 59800 Lille", 72, 4, "3ème étage", false, 0);
-        appart.afficher();
-
-        System.out.println("Test appartement avec balcon");
-        Appartement appart2 = new Appartement(hoteMaillon, 100, "46 Rue des Canonniers, 59800 Lille", 72, 4, "1er étage", true, 12);
-        appart2.afficher();
-
-        System.out.println("Test appartement avec rez de chaussé");
-        Appartement appart3 = new Appartement(hoteMaillon, 100, "46 Rue des Canonniers, 59800 Lille", 72, 4, "rez-de-chaussée", true, 8);
-        appart3.afficher();
-
-        System.out.println("Test Classe Reservation - Séjour Court");
-
-        // Création d'un voyageur
-        Voyageur maxime = new Voyageur("Maxime", "Albert", 29);
-
-        // Création d'un séjour court (4 nuits) pour la réservation
-        Date dateArriveeSejourCourt = Utile.creerDate(5, 7, 2024);
-        Sejour sejourCourt = new SejourCourt(dateArriveeSejourCourt, 4, maison, 2);
-
-        // Création et affichage de la réservation pour un séjour court
-        Reservation reservationCourt = new Reservation(sejourCourt, maxime);
-        reservationCourt.afficher();
-
-        System.out.println("Test Classe Reservation - Séjour Long");
-
-        // Création d'un séjour long (7 nuits) pour la réservation avec promotion
-        Date dateArriveeSejourLong = Utile.creerDate(5, 7, 2024);
-        Sejour sejourLong = new SejourLong(dateArriveeSejourLong, 7, maison, 2);
-
-        // Création et affichage de la réservation pour un séjour long
-        Reservation reservationLong = new Reservation(sejourLong, maxime);
-        reservationLong.afficher();
+        try {
+            Reservation reservation5 = new Reservation(sejour5, voyageur);
+            reservation5.afficher();
+        } catch (Exception e) {
+            System.out.println("Erreur : " + e.getMessage());
+        }
     }
 }

@@ -9,12 +9,14 @@ public abstract class Sejour implements Reservable {
 	private int nbNuits;
 	private Logement logement;
 	private int nbVoyageurs;
+	protected int prix;
 
 	public Sejour(Date dateArrivee, int nbNuits, Logement logement, int nbVoyageurs) {
 		this.dateArrivee = dateArrivee;
 		this.nbNuits = nbNuits;
 		this.logement = logement;
 		this.nbVoyageurs = nbVoyageurs;
+		miseAJourDuPrixDuSejour();
 	}
 
 	protected Date getDateArrivee() {
@@ -51,4 +53,6 @@ public abstract class Sejour implements Reservable {
 	public boolean aUnNombreDeVoyageursCorrect() {
 		return nbVoyageurs > 0 && nbVoyageurs <= logement.getNbVoyageursMax();
 	}
+
+	public abstract void miseAJourDuPrixDuSejour();
 }

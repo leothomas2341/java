@@ -14,6 +14,11 @@ public class SejourCourt extends Sejour {
 	}
 
 	@Override
+	public void miseAJourDuPrixDuSejour() {
+		prix = getNbNuits() * getLogement().getTarifParNuit();
+	}
+
+	@Override
 	public void afficher(){
 		super.afficher();
 		System.out.println("Le prix est de " + prix);

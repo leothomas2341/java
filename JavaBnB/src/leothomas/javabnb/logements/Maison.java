@@ -8,7 +8,7 @@ public class Maison extends Logement {
 	private boolean piscine;
 
 	public Maison(Personne hote, int tarifParNuit, String adresse, int superficie, int nbVoyageursMax,
-			boolean jardin, int superficieJardin, boolean piscine) {
+				  int superficieJardin, boolean piscine) {
 		super(hote, tarifParNuit, adresse, superficie, nbVoyageursMax);
 		this.jardin = jardin;
 		this.superficieJardin = superficieJardin;

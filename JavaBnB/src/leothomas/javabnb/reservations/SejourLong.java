@@ -21,6 +21,13 @@ public class SejourLong extends Sejour {
 	}
 
 	@Override
+	public void miseAJourDuPrixDuSejour() {
+		int tarifInitial = getNbNuits() * getLogement().getTarifParNuit();
+		promotion = tarifInitial * PROMOTION_EN_POURCENTAGE / 100;
+		prix = tarifInitial - promotion;
+	}
+
+	@Override
 	public void afficher(){
 		super.afficher();
 		System.out.println("Le prix de ce séjour long est " + prix + "La promotion est de " + promotion + "€");
